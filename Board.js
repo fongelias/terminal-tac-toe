@@ -30,15 +30,15 @@ module.exports = function Board() {
 		if(tileNumber > 9 || tileNumber < 1) {
 			return false;
 		}
+
 		const row = Math.floor((tileNumber - 1) / 3);
 		const col = (tileNumber - 1) % 3;
-		if(this.turn % 2 == 0) {
-			this.turn++;
-			return this.spaces[row][col].setX();
-	    } else {
-	    	this.turn++;
-			return this.spaces[row][col].setO();
-	    }
+		if(this.spaces[row][col].value) {
+			return false;
+		}
+		const res = this.turn % 2 == 0 ? this.spaces[row][col].setX() : this.spaces[row][col].setO();
+		this.turn++;
+		return res;
 	}
 
 	const isSameSymbol = (val1, val2, val3) => {
