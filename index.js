@@ -1,6 +1,6 @@
 
 
-const readline = require('readline');
+const reader = require('./Reader');
 const EventEmitter = require('events');
 
 const Board = require('./Board');
@@ -32,8 +32,7 @@ function TickTackToeGame() {
 	}
 
 	const evalTurn = () => {
-		console.log('evalTurn');
-		if(this.board.hasEmptySpaces && !this.board.winner()) {
+		if(this.board.hasEmptySpaces() && !this.board.winner()) {
 			if(this.board.turn % 2 == 0) {
 				console.log('player 1 turn')
 				this.emit(config.PLAYER_1_TURN_EVENT);
@@ -49,6 +48,7 @@ function TickTackToeGame() {
 			} else {
 				console.log('Tie game!');
 			}
+			reader.close();
 		}
 	}
 

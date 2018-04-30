@@ -1,4 +1,4 @@
-const readline = require('readline');
+const reader = require('./Reader');
 const EventEmitter = require('events');
 
 function HumanPlayer(board, game, turnEventName) {
@@ -8,21 +8,12 @@ function HumanPlayer(board, game, turnEventName) {
 	this.game = game;
 
 	const turn = () => {
-		console.log(this.turnEventName);
-		let reader = readline.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
-
 		reader.question('Make a move (Enter a tile number): ', (answer) => {
-			console.log(answer);
 			if(this.board.markTile(answer)) {
 				this.board.print();
 				this.emit('endTurn');
-				reader.close();
 			} else {
 				console.log('Invalid Move');
-				reader.close();
 				turn();
 			}
 		})

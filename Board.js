@@ -41,8 +41,8 @@ module.exports = function Board() {
 		return res;
 	}
 
-	const isSameSymbol = (val1, val2, val3) => {
-		return val1 & (val1 == val2 == val3) ? val1 : null;
+	const isSameSymbol = (space1, space2, space3) => {
+		return space1.value && (space1.value == space2.value && space2.value == space3.value) ? space1.value : null;
 	}
 
 	const hasHorizontalWinner = () => {
